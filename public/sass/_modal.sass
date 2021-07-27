@@ -1,0 +1,54 @@
+.modal
+  &-body
+    padding-bottom: 100px
+    @include media(small)
+      padding-bottom: 30px
+  &-xl
+    max-width: 1250px
+  &-content
+    border-radius: 31px
+    background-color: rgb(255, 255, 255)
+    box-shadow: 0px 0px 17.46px 0.54px rgba(0, 0, 0, 0.11)
+    border: 0
+    padding: 0 55px
+    @include media(small)
+      padding: 0 10px
+  &-header, &-footer
+    border: 0
+    .close
+      margin: -1rem -3.4rem -1rem auto
+      @include media(small)
+        margin: -1rem -2rem -1rem auto
+  &-backdrop
+    background-color: transparent
+  &-title
+    font-size: 60px
+    font-family: "Gilroy-SemiBold", sans-serif
+    color: rgb(35, 35, 35)
+    line-height: 1.2
+    margin-bottom: 100px
+    @include media(small)
+      margin-bottom: 30px
+      font-size: 20px
+    @include media(phone)
+      margin-bottom: 0
+    &-margin
+      margin-top: 84px
+      @include media(small)
+        margin-top: 0
+
+.my-input
+  width: 100%
+  border: 0
+  border-bottom: 1px solid #959595
+  padding: 10px 0
+  margin-bottom: 35px
+  font-size: 18px
+  font-family: "Gilroy-Medium", sans-serif
+  color: rgb(149, 149, 149)
+  line-height: 1.2
+  &::placeholder
+    font-size: 18px
+    font-family: "Gilroy-Medium", sans-serif
+    color: rgb(149, 149, 149)
+    line-height: 1.2
