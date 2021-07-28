@@ -44,7 +44,7 @@
         </div>
         <div class="info-flex">
             <div class="info-block-title">Ваш общий баланс</div>
-            <div class="info-block-text">{{ $user->balance }} <small>руб.</small></div>
+            <div class="info-block-text">{{ $user->balance+$user->bonus_balance }} <small>руб.</small></div>
         </div>
         <div class="info-flex">
             <div class="info-block-title">Реферальная ссылка</div>
