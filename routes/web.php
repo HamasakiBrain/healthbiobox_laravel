@@ -30,3 +30,17 @@ Route::prefix('/my/')->group(function (){
     Route::get('/payAndDelivery', [\App\Http\Controllers\HomeController::class, 'payAndDelivery'])->name('payAndDelivery');
     Route::get('/contract', [\App\Http\Controllers\HomeController::class, 'contract'])->name('contract');
 });
+
+Route::get('/lk/{referral_id}', [\App\Http\Controllers\ReferralController::class, 'create'])->name('lk.referral.register');
+
+//права
+Route::middleware(['isAdmin'])->group(function (){
+    Route::get('/1231239iasjd', function (){
+        return response(['json' => true]);
+    });
+    Route::prefix('/my/')->group(function (){
+        Route::any('/payAndDeliveryEdit/', [\App\Http\Controllers\HomeController::class, 'payAndDeliveryEdit'])->name('payAndDeliveryEdit');
+        Route::any('/contractEdit/', [\App\Http\Controllers\HomeController::class, 'contractEdit'])->name('contractEdit');
+    });
+    Route::any('/promo/edit', [\App\Http\Controllers\AdminController::class, 'edit_promo'])->name('edit.promo');
+});

@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get("/pay", [\App\Http\Controllers\PaymentController::class, 'createPayment'])->name('api.pay');
+Route::any('/pay/success', [\App\Http\Controllers\PaymentController::class, 'success']);
+Route::any('/pay/notify', [\App\Http\Controllers\PaymentController::class, 'notify']);

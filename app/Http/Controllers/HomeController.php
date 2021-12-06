@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Settings;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Promo;
 
 class HomeController extends Controller
 {
@@ -17,13 +23,13 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->user = Auth::user();
+
     }
 
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
     public function index()
     {
@@ -62,9 +68,15 @@ class HomeController extends Controller
 
     }
 
+    /**
+     * @return Application|Factory|View
+     */
     public function bonus()
     {
-        return view('bonus');
+        $user = Auth::user();
+        return view('bonus')->with([
+            'user' => $user
+        ]);
     }
 
     public function orderHistory()
@@ -74,17 +86,48 @@ class HomeController extends Controller
 
     public function promo()
     {
-        return view('promo');
+        $promos = Promo::all();
+        return view('promo')->with(['promos' => $promos]);
     }
 
     public function payAndDelivery()
     {
-        return view('pay_and_delivery');
+        $texts  = Settings::all()->whereIn('name', ['Pay', 'Delivery']);
+        return view('pay_and_delivery')->with(['text' => $texts]);
+    }
+    public function payAndDeliveryEdit(Request $request){
+        $texts  = Settings::all()->whereIn('name', ['Pay', 'Delivery']);
+        if ($request->method() == 'POST'){
+            foreach($request->settings as $k => $item) {
+                $s = Settings::find($k);
+                $s->data = $item;
+                $s->save();
+            }
+            return redirect()->route('payAndDelivery');
+
+        } else {
+            return view('payAndDeliveryEdit')->with(['text' => $texts]);
+        }
     }
 
     public function contract()
     {
-        return view('contract');
+        $texts  = Settings::all()->whereIn('name', ['Dogovor'])->first();
+        return view('contract')->with(['text' => $texts]);
     }
 
+    public function contractEdit(Request $request){
+        $texts  = Settings::all()->whereIn('name', ['Dogovor']);
+        if ($request->method() == 'POST'){
+            foreach($request->settings as $k => $item) {
+                $s = Settings::find($k);
+                $s->data = $item;
+                $s->save();
+            }
+            return redirect()->route('contract');
+
+        } else {
+            return view('contractEdit')->with(['text' => $texts]);
+        }
+    }
 }

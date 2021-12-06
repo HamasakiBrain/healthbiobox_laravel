@@ -4,7 +4,10 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -23,7 +26,8 @@ class User extends Authenticatable
         'password',
         'phone',
         'delivery',
-        'balance'
+        'balance',
+        'referral_id'
     ];
 
     /**
@@ -52,5 +56,31 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class, 'user_roles', 'user_id', 'role_id')
             ->withPivot('id')->withTimestamps();
+    }
+
+    /**
+     * @return BelongsTo|BelongsToMany
+     */
+    public function referral()
+    {
+        return $this->belongsToMany(User::class, 'user_users', 'referral_id', 'user_id')
+            ->withPivot('id')->withTimestamps();
+
+    }
+    public function owner() {
+        return $this->hasOne(Referral::class, 'user_id', 'id');
+    }
+
+    /**
+     * @param array $roles
+     * @return bool
+     */
+    public function hasPermission(array $roles): bool
+    {
+        $r = [];
+        foreach ($this->role as $role) {
+            array_push($r, $role->name);
+        }
+        return count(array_intersect($r, $roles)) > 0;
     }
 }

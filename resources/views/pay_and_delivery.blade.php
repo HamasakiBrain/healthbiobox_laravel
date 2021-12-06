@@ -6,15 +6,18 @@
             <div class="card my-card-nofixed">
                 <div class="title">Оплата</div>
                 <div class="contract_text">
-                    <p class="mb-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium alias, aspernatur autem cum et eum explicabo, itaque laboriosam laborum quam rem sint, ullam vero voluptas voluptates. Accusamus commodi laudantium nesciunt.</p>
-                    <p class="mb-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium alias, aspernatur autem cum et eum explicabo, itaque laboriosam laborum quam rem sint, ullam vero voluptas voluptates. Accusamus commodi laudantium nesciunt.</p>
+                    {!! $text[1]->data !!}
                 </div>
                 <div class="title mt-5">Доставка</div>
                 <div class="contract_text">
-                    <p class="mb-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium alias, aspernatur autem cum et eum explicabo, itaque laboriosam laborum quam rem sint, ullam vero voluptas voluptates. Accusamus commodi laudantium nesciunt.</p>
-                    <p class="mb-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium alias, aspernatur autem cum et eum explicabo, itaque laboriosam laborum quam rem sint, ullam vero voluptas voluptates. Accusamus commodi laudantium nesciunt.</p>
+                    {!! $text[2]->data !!}
                 </div>
+                @if(Auth::user()->hasPermission(['Администратор']))
+                    <a href="{{ route('payAndDeliveryEdit') }}" class="btn-orange text-white">Редактировать</a>
+                @endif
             </div>
+
         </div>
+
     </div>
 @endsection

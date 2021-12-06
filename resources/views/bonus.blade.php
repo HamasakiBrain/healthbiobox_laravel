@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="title bonus-title">Ваш бонусный счет</div>
-                        <div class="balance">8 400 <small>руб.</small></div>
+                        <div class="balance">{{ $user->bonus_balance  }} <small>руб.</small></div>
                         <div class="contract_text bonus_text mt-3">
                             Бонусы начисляются на счет аккаунта
                             в размере 20% от суммы заказов,
@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-md-4 pay">
                         <div class="title bonus-title">Купить продукт</div>
-                        <a href="#" class="froud-btn bonus-btn">Купить</a>
+                        <a href="#" class="froud-btn bonus-btn mb-1"  data-toggle="modal" data-target="#pay">Купить</a>
                         <input class="styled-checkbox payBonusCheckBox" id="checkboxPay" type="checkbox" name="checkboxPay" value="1" checked>
                         <label for="checkboxPay" class="payBonusType">Списать бонусы при оплате</label>
                         <input class="styled-checkbox payBonusCheckBox" id="checkboxNoPay" type="checkbox" name="checkboxPay" value="0">

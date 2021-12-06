@@ -48,7 +48,7 @@
         </div>
         <div class="info-flex">
             <div class="info-block-title">Реферальная ссылка</div>
-            <div class="info-block-text info-block-text_link" onclick="copyToClipboard('referal_link2')"><img src="{{ asset('img/copy.png') }}" alt=""> <span id="referal_link2">https://dasdasld.ru/asd</span>
+            <div class="info-block-text info-block-text_link" onclick="copyToClipboard('referal_link2')"><img src="{{ asset('img/copy.png') }}" alt=""> <span id="referal_link2">{{ env('APP_URL') }}lk/{{ $user->referral_id }}</span>
             </div>
         </div>
     </div>
@@ -127,6 +127,40 @@
                     </div>
                     <div class="form-group">
                         <input type="text" class="my-input" placeholder="Введите Ваш номер телефона">
+                    </div>
+                    <button class="froud-btn">Оставить заявку</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="pay" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title modal-title-margin" id="exampleModalLabel">Оплата</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('api.pay') }}" method="GET">
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="description" value="Описание">
+                    <div class="form-group">
+                        <label for="amount">6500 ₽</label>
+                        <input class="" type="radio" id="amount" name="amount" value="6500">
+                    </div>
+                    <div class="form-group">
+                        <label for="amount1">10000 ₽</label>
+                        <input class="" type="radio" id="amount1" name="amount" value="10000">
+                    </div>
+                    <div class="form-group">
+                        <label for="amount2">15000 ₽</label>
+                        <input class="" type="radio" id="amount2" name="amount" value="15000">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="my-input" placeholder="Промокод" name="promo">
                     </div>
                     <button class="froud-btn">Оставить заявку</button>
                 </form>

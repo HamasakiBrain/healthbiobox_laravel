@@ -16,6 +16,7 @@
                     <input type="text" class="my-input transparent @error('email') is-invalid @enderror"
                            placeholder="Введите e-mail" name="email" value="{{ old('email') }}" required
                            autocomplete="email" >
+                    <input type="hidden" name="referral_id" value="{{ $referral_id  ?? ""}}">
                     @error('email')
                     <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
